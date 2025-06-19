@@ -8,9 +8,6 @@ Projekt do trenowania modelu klasyfikacji obrazów oraz udostępniania go przez 
 
 ### 1. Utwórz i aktywuj wirtualne środowisko
 
-**Windows:**
-
-```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
 
