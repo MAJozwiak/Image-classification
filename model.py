@@ -20,10 +20,10 @@ def train_model():
 
     loss, accuracy = model.evaluate(test_gen)
 
-    # Zapisz model po treningu
+
     model.save("model.h5")
 
-    # Zwróć wynik jako słownik
+
     return {"loss": float(loss), "accuracy": float(accuracy)}
 
 def test_model():
