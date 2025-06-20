@@ -1,8 +1,7 @@
-from model import build_model
-from utils import get_data_generators
+def train_model():
+    from model import build_model
+    from utils import get_data_generators
 
-
-def main():
     train_dir = 'dataset/train'
     test_dir = 'dataset/test'
     img_size = (224, 224)
@@ -20,8 +19,29 @@ def main():
     )
 
     loss, accuracy = model.evaluate(test_gen)
-    print(f"{accuracy:.4f}")
+
+    model.save("model.h5")
+
+    return {"loss": float(loss), "accuracy": float(accuracy)}
+
+
+def test_model():
+    from tensorflow.keras.models import load_model
+    from utils import get_data_generators
+
+    train_dir = 'dataset/train'
+    test_dir = 'dataset/test'
+    img_size = (224, 224)
+    batch_size = 32
+
+    model = load_model("model.h5")
+
+    _, test_gen = get_data_generators(train_dir, test_dir, img_size, batch_size)
+
+    loss, accuracy = model.evaluate(test_gen)
+    return float(accuracy)
 
 
 if __name__ == '__main__':
-    main()
+    results = train_model()
+    print(f"Trening zakończony. Accuracy: {results['accuracy']:.4f}")
